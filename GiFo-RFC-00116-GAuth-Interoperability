@@ -303,8 +303,8 @@ The full JSON Schema is provided in Appendix B. Here is the structure overview:
     "type": "object",
     "required": ["parties", "scope", "requirements"],
     "properties": {
-      "schema_version": {
-        "const": "0116.2.2"
+         "schema_version": {
+        "const": "0116.2.3"
       },
       "parties": {
         "type": "object",
@@ -391,11 +391,15 @@ The full JSON Schema is provided in Appendix B. Here is the structure overview:
           "session_limits": {
             "$ref": "#/$defs/SessionLimits"
           },
-          "ttl_seconds": {
+              "ttl_seconds": {
             "type": "integer",
             "minimum": 60
           }
         }
+      },
+      "conditions": {
+        "$ref": "#/$defs/Conditions",
+        "description": "Grantor-defined runtime conditions on the grant, realising GiFo-RFC 0115 §C 'Special Conditions'. Evaluated at action time by GiFo-RFC 0117 §9.2 CHK-17. Non-satisfaction → per-action FAIL, not credential revocation."
       }
     },
     "$defs": {
@@ -472,7 +476,7 @@ The full JSON Schema is provided in Appendix B. Here is the structure overview:
           "remaining_cents": { "type": "integer", "minimum": 0 }
         }
       },
-      "SessionLimits": {
+        "SessionLimits": {
         "type": "object",
         "properties": {
           "max_tool_calls": { "type": "integer", "minimum": 1 },
@@ -481,6 +485,22 @@ The full JSON Schema is provided in Appendix B. Here is the structure overview:
           "session_id": { "type": "string" },
           "started_at": { "type": "string", "format": "date-time" }
         }
+      },
+      "Conditions": {
+        "type": "object",
+        "description": "Grantor-defined runtime conditions on the grant (GiFo-RFC 0115 §C). Evaluated by GiFo-RFC 0117 §9.2 CHK-17.",
+        "properties": {
+          "min_trust_class": {
+            "type": "string",
+            "enum": ["Untrusted", "Probationary", "Standard", "Trusted", "Verified Partner"],
+            "description": "Minimum trust tier of the attorney-in-fact per GiFo-RFC 0140 §4.3.3. PEP resolves effective_tier := min(local_tier, cross_tier) via PIP (non-upward monotone). Non-satisfaction → REPUTATION_BELOW_GRANT_CONDITION."
+          },
+          "continuous_verification": {
+            "type": "boolean",
+            "description": "If true, the PEP MUST apply Strict-profile verification discipline for this credential (push-based revocation per GiFo-RFC 0210 §3.5 Q6, stateful re-evaluation) regardless of the deployment governance profile."
+          }
+        },
+        "additionalProperties": false
       }
     }
   }
