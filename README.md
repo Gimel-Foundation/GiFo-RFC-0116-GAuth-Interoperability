@@ -1,4 +1,4 @@
-# GiFo-RFC-0116
+# GiFo-RFC-0116 (version 2.2.1)
 
 GAuth Interoperability
 
