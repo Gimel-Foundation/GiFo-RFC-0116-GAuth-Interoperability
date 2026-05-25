@@ -304,7 +304,7 @@ The full JSON Schema is provided in Appendix B. Here is the structure overview:
     "required": ["parties", "scope", "requirements"],
     "properties": {
       "schema_version": {
-        "const": "0116.2.3"
+        "const": "0116.2.2.1"
       },
       "parties": {
         "type": "object",
@@ -723,7 +723,7 @@ The ``gauth`` namespace carries the PoA scope attributes from the canonical sche
 
   {
     "gauth": {
-      "version": "0116.2.2",
+      "version": "0116.2.2.1",
       "credential_id": "poa-cs-001-abc123",
       "customer_id": "cust_123",
       "project_id": "proj_456",
@@ -862,7 +862,7 @@ The GAuth PoA credential is represented as a W3C Verifiable Credential conformin
       "statusListCredential": "https://gauth.gimel.dev/credentials/status/3"
     },
     "credentialSchema": {
-      "id": "https://gimelfoundation.com/schemas/poa/v2.2/poa-credential.json",
+      "id": "https://gimelfoundation.com/schemas/poa/v2.2.1/poa-credential.json",
       "type": "JsonSchema"
     },
     "proof": {
@@ -1708,7 +1708,7 @@ A GAuth-conformant verifier SHOULD:
 13.3 Version Negotiation
 --------------------------
 
-The ``gauth.version`` claim (JWT) and ``schema_version`` property (canonical schema) carry the GiFo-RFC 0116 version in ``MAJOR.MINOR`` format (e.g., ``"0116.2.2"``).
+The ``gauth.version`` claim (JWT) and ``schema_version`` property (canonical schema) carry the GiFo-RFC 0116 version in ``MAJOR.MINOR`` format (e.g., ``"0116.2.2.1"``).
 
 Versioning rules:
 
@@ -1736,14 +1736,14 @@ Discovery document structure:
 
   {
     "issuer": "https://gauth.example.com",
-    "gauth_version": "0116.2.2",
-    "supported_versions": ["0116.2.1", "0116.2.2"],
+    "gauth_version": "0116.2.2.1",
+    "supported_versions": ["0116.2.1", "0116.2.2.1"],
     "jwks_uri": "https://gauth.example.com/.well-known/jwks.json",
     "credential_formats_supported": ["jwt", "w3c_vc", "sd-jwt"],
     "governance_profiles_supported": ["minimal", "standard", "strict", "enterprise", "behoerde"],
     "status_list_endpoint": "https://gauth.example.com/credentials/status",
     "openid4vci_endpoint": "https://gauth.example.com/credentials",
-    "schema_uri": "https://gimelfoundation.com/schemas/poa/v2.2/poa-credential.json"
+    "schema_uri": "https://gimelfoundation.com/schemas/poa/v2.2.1/poa-credential.json"
   }
 
 This enables verifiers and clients to discover the capabilities of a GAuth issuer programmatically, without prior configuration.
