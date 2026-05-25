@@ -297,7 +297,7 @@ The full JSON Schema is provided in Appendix B. Here is the structure overview:
 
   {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "$id": "https://gimelfoundation.com/schemas/poa/v2.2/poa-credential.json",
+    "$id": "https://gimelfoundation.com/schemas/poa/v2.2.1/poa-credential.json",
     "title": "GAuth PoA Credential",
     "description": "Canonical schema for GAuth Power of Attorney credentials (GiFo-RFC 0116)",
     "type": "object",
@@ -504,6 +504,8 @@ The full JSON Schema is provided in Appendix B. Here is the structure overview:
       }
     }
   }
+
+The optional ``conditions`` block at the top level of the PoA credential realises the abstract "Special Conditions" slot defined in GiFo-RFC 0115 §C. Conditions are statically expressed by the grantor at issuance time but dynamically evaluated by the PEP at action time. The ``min_trust_class`` field is evaluated against the deterministic 5-tier Trust Score model in GiFo-RFC 0140 §4.3.3; ``continuous_verification`` raises verification discipline for this credential to the Strict-profile level (GiFo-RFC 0210 §3.5 Q6) regardless of deployment profile. Condition non-satisfaction at action time results in a per-action FAIL by the PEP (GiFo-RFC 0117 §9.2 CHK-17) — the credential itself remains valid and may carry subsequent actions once the condition is met again. Conditions are non-breaking: credentials issued without a ``conditions`` field remain valid unchanged.
 
 4.4 Scope Checksum
 -------------------
@@ -1814,7 +1816,7 @@ Appendix B: GAuth PoA — JSON Schema (Canonical Format)
 
 The complete JSON Schema is provided in Section 4.3 inline. The schema is published at:
 
-Schema URI: ``https://gimelfoundation.com/schemas/poa/v2.2/poa-credential.json``
+Schema URI: ``https://gimelfoundation.com/schemas/poa/v2.2.1/poa-credential.json``
 
 Implementations MUST validate PoA credentials against this schema before issuance and upon receipt. The schema serves as the single source of truth for both JWT claims projection and W3C VC credential subject structure.
 
