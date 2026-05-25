@@ -303,7 +303,7 @@ The full JSON Schema is provided in Appendix B. Here is the structure overview:
     "type": "object",
     "required": ["parties", "scope", "requirements"],
     "properties": {
-         "schema_version": {
+      "schema_version": {
         "const": "0116.2.3"
       },
       "parties": {
@@ -391,7 +391,7 @@ The full JSON Schema is provided in Appendix B. Here is the structure overview:
           "session_limits": {
             "$ref": "#/$defs/SessionLimits"
           },
-              "ttl_seconds": {
+          "ttl_seconds": {
             "type": "integer",
             "minimum": 60
           }
@@ -476,7 +476,7 @@ The full JSON Schema is provided in Appendix B. Here is the structure overview:
           "remaining_cents": { "type": "integer", "minimum": 0 }
         }
       },
-        "SessionLimits": {
+      "SessionLimits": {
         "type": "object",
         "properties": {
           "max_tool_calls": { "type": "integer", "minimum": 1 },
